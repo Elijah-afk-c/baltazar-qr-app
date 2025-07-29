@@ -56,9 +56,7 @@ export default {
         },
         responseType: "token id_token",
         scope: ["openid", "profile", "email"],
-        redirectUri: process.env.VERCEL_URL
-          ? `https://${process.env.VERCEL_URL}/auth/callback` // For production
-          : "http://localhost:3000/auth/callback", // For local development
+        redirectUri: process.env.GOOGLE_REDIRECT_URI || "http://localhost:3000/auth/callback",
         codeChallengeMethod: "",
       }
     }
