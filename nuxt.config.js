@@ -71,7 +71,7 @@ export default {
       },
       responseType: "token id_token",
       scope: ["openid","profile","email"],
-      redirectUri: process.env.GOOGLE_REDIRECT_URI ||"http://localhost:3000/auth/callback",
+      redirectUri: process.env.GOOGLE_CLIENT_ID ||"http://localhost:3000/auth/callback",
       codeChallengeMethod:"",
     },
   }
