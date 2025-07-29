@@ -1,10 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  // Disable server-side rendering
   ssr: false,
 
-  // Global page headers
   head: {
     titleTemplate: '%s - baltazar-qr-app',
     title: 'baltazar-qr-app',
@@ -18,29 +16,23 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
-  // Global CSS
   css: [],
 
-  // Plugins
   plugins: [
     '~/plugins/html5-qrcode.js'
   ],
 
-  // Auto import components
   components: true,
 
-  // Build modules
   buildModules: [
     '@nuxtjs/vuetify',
   ],
 
-  // Modules
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next'
   ],
 
-  // Authentication
   auth: {
     redirect: {
       login: "/auth/signin",
@@ -55,7 +47,7 @@ export default {
         scheme: "oauth2",
         endpoints: {
           authorization: "https://accounts.google.com/o/oauth2/auth",
-          userInfo: "https://www.googleapis.com/oauth2/v3/userinfo"
+          userInfo: "https://www.googleapis.com/oauth2/v3/userinfo",
         },
         token: {
           property: "access_token",
@@ -64,13 +56,14 @@ export default {
         },
         responseType: "token id_token",
         scope: ["openid", "profile", "email"],
-        redirectUri: process.env.GOOGLE_REDIRECT_URI || "http://localhost:3000/auth/callback",
+        redirectUri: process.env.VERCEL_URL
+          ? `https://${process.env.VERCEL_URL}/auth/callback` // For production
+          : "http://localhost:3000/auth/callback", // For local development
         codeChallengeMethod: "",
       }
     }
   },
 
-  // Vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
@@ -89,6 +82,5 @@ export default {
     }
   },
 
-  // Build Configuration
   build: {}
 }
